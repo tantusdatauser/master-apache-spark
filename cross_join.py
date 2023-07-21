@@ -9,9 +9,9 @@ sc = spark.sparkContext
 is_aws = os.environ.get("AWS_ACCESS_KEY_ID") is not None
 
 if is_aws:
-    URL = 's3a://spark-data-tantusdata/500K-products.2.5M-orders'
+    URL = 's3a://tantusdata/master-apache-spark/500K-products.2.5M-orders'
 else:
-    URL = 's3://spark-data-tantusdata/500K-products.2.5M-orders/'
+    URL = 's3://tantusdata/master-apache-spark/500K-products.2.5M-orders/'
 
 productsDf = spark.read.parquet(os.path.join(URL, 'products.parquet'))
 ordersDf = spark.read.parquet(os.path.join(URL, 'orders.parquet'))
@@ -76,8 +76,8 @@ def checkCorrectness(resultNormalDf, resultOptimizedDf):
 
 # replace with your own s3 bucket url
 productsPairsDfDefault = crossJoinDefault()
-productsPairsDfDefault.write.parquet(os.path.join('s3a://tantusdata/master-apache-spark/100K-users.1B-events-with-timestamp.skew9-1', 'productsPairsDfDefault.parquet'))
+productsPairsDfDefault.write.parquet(os.path.join('s3a://tantusdata/master-apache-spark/500K-products.2.5M-orders', 'productsPairsDfDefault.parquet'))
 productsPairsDfOptimized = crossJoinOptimized()
-productsPairsDfOptimized.write.parquet(os.path.join('s3a://tantusdata/master-apache-spark/100K-users.1B-events-with-timestamp.skew9-1', 'productsPairsDfOptimized.parquet'))
+productsPairsDfOptimized.write.parquet(os.path.join('s3a://tantusdata/master-apache-spark/500K-products.2.5M-orders', 'productsPairsDfOptimized.parquet'))
 
 checkCorrectness(productsPairsDfDefault, productsPairsDfOptimized)
