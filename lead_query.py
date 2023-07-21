@@ -11,9 +11,9 @@ sc = spark.sparkContext
 is_aws = os.environ.get("AWS_ACCESS_KEY_ID") is not None
 
 if is_aws:
-    URL = 's3://tantusdata/master-apache-spark/100K-users.1B-events-with-timestamp.skew9-1'
-else:
     URL = 's3a://tantusdata/master-apache-spark/100K-users.1B-events-with-timestamp.skew9-1'
+else:
+    URL = 's3://tantusdata/master-apache-spark/100K-users.1B-events-with-timestamp.skew9-1'
 
 eventsDf = spark.read.parquet(os.path.join(URL, 'events.parquet'))
 
