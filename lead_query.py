@@ -89,6 +89,7 @@ def checkCorrectness(resultNormalDf, resultOptimizedDf):
 
 
 # replace with your own s3 bucket url
+# you can run just the default query to reproduce the problem, or just the optimized query to see the improvement.
 resultNormalDf = leadQueryDefault()
 resultNormalDf.write.parquet(os.path.join('s3a://tantusdata/master-apache-spark/100K-users.1B-events-with-timestamp.skew9-1', 'leadQueryDefault.parquet'))
 resultOptimizedDf = leadQueryOptimized()
